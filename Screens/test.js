@@ -1,20 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Pressable, ScrollView, Alert, } from 'react-native';
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, Text, View, Image, Pressable, ScrollView, SafeAreaView, Alert, navigate, navigation } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Superior } from './Screens/superior';
 
-function HomeScreen({ navigation }) {
+export default function HomeScreen(props) {
   return (
-    <View style={styles.container}>
+          <View style={styles.container}>
           <ScrollView>
       
           <Image source={require('./assets/imagens/treinofacil.png')} style={{width:200, height:200, alignSelf:'center'}} />
           <Text style={{alignSelf:'center', fontSize:40}}>Treino Fácil!</Text>
           <StatusBar style="auto" />
       
-          <Pressable onPress={() => navigation.navigate('Treino Superior')}>
+          <Pressable onPress={OpenSupTraining}>
             <View style={styles.btnSelectTraining}>
               <Image source={require('./assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10}} />
               <Text>Superiores </Text>
@@ -29,8 +27,8 @@ function HomeScreen({ navigation }) {
           </Pressable>
           </ScrollView>
         </View>
-  );
-}
+        );
+      }
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#B0B0B0',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:10
   },
   btnSelectTraining: {
     margin:15,
@@ -50,25 +49,9 @@ const styles = StyleSheet.create({
   }
 });
 
-const Stack = createNativeStackNavigator();
-
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Treino Fácil" component={HomeScreen} />
-        <Stack.Screen name="Treino Superior" component={Superior} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-
-export default App;
-
 function OpenSupTraining() {
-  Alert.alert('Funcionou!','Aqui vai abrir o treino superior');
-  navigation.navigate('./Screens/superior.js')
-  
+  Alert.alert('Funcionou!','Aqui vai abrir o treino superior')
+  navigation.navigate('Profile', {name: 'Superior'})
 }
 
 function OpenInfTraining() {
