@@ -6,50 +6,28 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { List } from 'react-native-paper';
-import { Treinos } from './exercicio';
-import { FlatList } from 'react-native-gesture-handler';
 
-export function Superior() {
+export function Treinos(exercicio,serie,repeticao,peso,descanco) {
   
-
-
-  return (
-  <ScrollView>
-
-    <View style={styles.container}>
-     
-
-        <View style={styles.btnSelectTraining}>
-          <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10,}} />
-          <Text> Superiores </Text>
-        </View>
-        
-        
-        <View>
-        {dados.map((dados) => {
-          return (
-            
-            <List.Accordion style={{width:350, borderTopLeftRadius:20, borderTopRightRadius:20 }} title= {dados.exercicio}>
+    const [expanded, setExpanded] = React.useState(true);
+    const handlePress = () => setExpanded(!expanded);
+  
+    return (
+        <List.Accordion style={{width:350, borderTopLeftRadius:20, borderTopRightRadius:20 }} title= {exercicio}>
           <View style={{alignContent:'center', alignItems:'baseline'}}>
             <Card style={{alignContent:'center', width:350, borderBottomLeftRadius:10,borderBottomRightRadius:10, borderRadius:0}}>
               <Card.Content style={{}}>
                 <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
                 <View style={{marginLeft:20, flexDirection:'row', alignSelf:'center', gap:15}}>
-                  <Text style={styles.descricao}><Feather name="repeat" size={15} color="#EDCAFF" />  {dados.serie} / {dados.repeticao} </Text>
-                  <Text style={styles.descricao}><MaterialCommunityIcons name="weight-kilogram" size={20} color="#EDCAFF" />  {dados.peso} kg </Text>
-                  <Text style={styles.descricao}><MaterialCommunityIcons name="clock-time-eight-outline" size={20} color="#EDCAFF" />  {dados.descanco}s </Text>
+                  <Text style={styles.descricao}><Feather name="repeat" size={15} color="#EDCAFF" />  {serie} / {repeticao} </Text>
+                  <Text style={styles.descricao}><MaterialCommunityIcons name="weight-kilogram" size={20} color="#EDCAFF" />  {peso} kg </Text>
+                  <Text style={styles.descricao}><MaterialCommunityIcons name="clock-time-eight-outline" size={20} color="#EDCAFF" />  {descanco}s </Text>
                 </View>
               </Card.Content>
             </Card>
           </View>
         </List.Accordion>
-          );
-        })}
-      </View>
-      </View>
-        </ScrollView>
-    );
-  }
+    )}
 
 const styles = StyleSheet.create({
   container: {
@@ -65,8 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: 'black',
     width:'100%',
-    marginVertical:20,
-    top:0,
+    marginVertical:20
   },
   descricao: {
     backgroundColor:'#693E7F',
@@ -78,19 +55,3 @@ const styles = StyleSheet.create({
   }
     
 });
-
-const dados = [{
-  exercicio: 'biceps halter',
-  serie: 4,
-  repeticao: 10,
-  peso: 25,
-  descanco: 60
-},
-{
-  exercicio: 'biceps barra',
-  serie: 4,
-  repeticao: 10,
-  peso: 30,
-  descanco: 60
-}]
-

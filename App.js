@@ -7,8 +7,9 @@ import { Superior } from './Screens/superior';
 
 function HomeScreen({ navigation }) {
   return (
+    
     <View style={styles.container}>
-          <ScrollView>
+          
       
           <Image source={require('./assets/imagens/treinofacil.png')} style={{width:200, height:200, alignSelf:'center'}} />
           <Text style={{alignSelf:'center', fontSize:40}}>Treino Fácil!</Text>
@@ -21,13 +22,13 @@ function HomeScreen({ navigation }) {
             </View>
           </Pressable>
       
-          <Pressable onPress={OpenInfTraining}>
+          <Pressable onPress={() => navigation.navigate('Treino Superior')}>
             <View style={styles.btnSelectTraining}>
                 <Image source={require('./assets/imagens/perna.png')} style={{width:100, height:100, marginBottom:10}} />
               <Text>Inferiores</Text>
             </View>
           </Pressable>
-          </ScrollView>
+          
         </View>
   );
 }
@@ -64,13 +65,3 @@ function App() {
 }
 
 export default App;
-
-function OpenSupTraining() {
-  Alert.alert('Funcionou!','Aqui vai abrir o treino superior');
-  navigation.navigate('./Screens/superior.js')
-  
-}
-
-function OpenInfTraining() {
-  Alert.alert('Funcionou!','Aqui vai abrir o treino inferrior')
-}
