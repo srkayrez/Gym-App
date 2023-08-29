@@ -29,10 +29,11 @@ export function Superior() {
         {dados.map((dados) => {
           return (
             
-            <List.Accordion style={{width:350, borderTopLeftRadius:20, borderTopRightRadius:20 }} title= {dados.exercicio}>
-          <View style={{alignContent:'center', alignItems:'baseline'}}>
-            <Card style={{alignContent:'center', width:350, borderBottomLeftRadius:10,borderBottomRightRadius:10, borderRadius:0}}>
+          
+          <View style={{alignContent:'center', alignItems:'baseline', marginBottom:15}}>
+            <Card style={{alignContent:'center', width:350, borderRadius:10,}}>
               <Card.Content style={{}}>
+                <Text style={{textAlign:'center', fontSize:20, marginBottom:10}}> {dados.exercicio} </Text>
                 <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
                 <View style={{marginLeft:20, flexDirection:'row', alignSelf:'center', gap:15}}>
                   <Text style={styles.descricao}><Feather name="repeat" size={15} color="#EDCAFF" />  {dados.serie} / {dados.repeticao} </Text>
@@ -42,7 +43,6 @@ export function Superior() {
               </Card.Content>
             </Card>
           </View>
-        </List.Accordion>
           );
         })}
       </View>
@@ -92,5 +92,13 @@ const dados = [{
   repeticao: 10,
   peso: 30,
   descanco: 60
-}]
+},
+{
+  exercicio: 'biceps rosca',
+  serie: 4,
+  repeticao: 10,
+  peso: 30,
+  descanco: 60
+},
+]
 
