@@ -15,18 +15,14 @@ function HomeScreen({ navigation }) {
           <Text style={{alignSelf:'center', fontSize:40}}>Treino Fácil!</Text>
           <StatusBar style="auto" />
       
-          <Pressable onPress={() => navigation.navigate('Treino Superior')}>
-            <View style={styles.btnSelectTraining}>
+          <Pressable style={styles.btnSelectTraining} onPress={() => navigation.navigate('Treino Superior')}>
               <Image source={require('./assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10}} />
               <Text>Superiores </Text>
-            </View>
           </Pressable>
       
-          <Pressable onPress={() => navigation.navigate('Treino Superior')}>
-            <View style={styles.btnSelectTraining}>
+          <Pressable style={styles.btnSelectTraining} onPress={() => navigation.navigate('Treino Superior')}>
                 <Image source={require('./assets/imagens/perna.png')} style={{width:100, height:100, marginBottom:10}} />
               <Text>Inferiores</Text>
-            </View>
           </Pressable>
           
         </View>
@@ -44,7 +40,7 @@ const styles = StyleSheet.create({
     margin:15,
     padding: 10,
     backgroundColor: 'white',
-    width: 300,
+    width: '90%',
     alignItems: 'center',
     borderRadius: 5,
     borderColor: 'black'
