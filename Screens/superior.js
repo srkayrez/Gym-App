@@ -39,13 +39,13 @@ export function Superior() {
   // }
   
   return (
-    <ScrollView style=''>
+    <ScrollView>
 
     <View style={styles.container}>
      
 
         <View style={styles.btnSelectTraining}>
-          <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10,}} />
+          <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginVertical:10,}} />
           <Text> Superiores </Text>
         </View>
         
@@ -63,6 +63,7 @@ export function Superior() {
             <Card style={{alignContent:'center', width:'90%', borderRadius:10,}}>
               <Card.Content style={{}}>
               <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
+              <Text style={{textAlign:'center'}}>{dados.seriesFeitas*4}/{dados.serie}</Text>
               <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text style={{textAlign:'center', fontSize:20, marginBottom:10}}> {dados.exercicio} </Text>
                     
@@ -122,7 +123,7 @@ export function Superior() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#B0B0B0',
+      backgroundColor: '#EDEBFF',
       alignItems: 'center',
       justifyContent: 'center',
       width: '100%'
@@ -130,10 +131,9 @@ export function Superior() {
     btnSelectTraining: {
       backgroundColor: 'white',
       alignItems: 'center',
-      borderRadius: 5,
       borderColor: 'black',
-      width:'90%',
-      marginVertical:20,
+      width:'100%',
+      marginBottom:20,
     top:0,
   },
   descricao: {
