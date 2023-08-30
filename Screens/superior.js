@@ -1,22 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button, ScrollView, Alert, Pressable, } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Alert, Pressable, TouchableOpacity} from 'react-native';
 import * as React from 'react';
-import { Switch, Card } from 'react-native-paper';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Card } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { List } from 'react-native-paper';
-import { Treinos } from './exercicio';
-import { FlatList, RefreshControl } from 'react-native-gesture-handler';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
 import {useState} from 'react';
 import { Checkbox } from 'react-native-paper';
-import { ReloadInstructions } from 'react-native/Libraries/NewAppScreen';
+import { Button } from 'react-native-paper';
+import { RadioButton } from 'react-native-paper';
+
+
+
+
 
 export function Superior() {
   
-  const [timesPressed, setTimesPressed] = useState(0);
+ 
   const [checked, setChecked] = React.useState(false);
+  const [valor, setValor] = React.useState(0)
+
+  
+  function soma(id, series){
+
+    // alert(series)
+    
+    if (series < 1){
+      
+      series += 0.25
+      setValor(prev => prev+1)
+        
+      }else series = 0;
+  
+      return dados[id].seriesFeitas = series
+    
+  }
   
   return (
     <ScrollView>
@@ -32,27 +49,17 @@ export function Superior() {
         
         <View>
         {dados.map((dados) => {
+
           return (
             
             
-            <View style={{alignContent:'center', alignItems:'baseline', marginBottom:15}}>
+            <View style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
             <Card style={{alignContent:'center', width:350, borderRadius:10,}}>
               <Card.Content style={{}}>
-              <ProgressBar progress={numeroSerieConcluida} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
+              <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
               <View>
                 <Text style={{textAlign:'center', fontSize:20, marginBottom:10}}> {dados.exercicio} </Text>
-                <Checkbox
-                  status={checked ? 'checked' : 'unchecked'}
-                  onPress={() => { 
-                    setChecked(!checked);
-                    soma();
                     
-                    
-                  }}
-                  />
-                    <Button
-                    onPress={soma}
-                    title="Learn More"/>
               </View>
                 <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
                 <View style={{marginLeft:20, flexDirection:'row', alignSelf:'center', gap:15}}>
@@ -61,10 +68,31 @@ export function Superior() {
                   <Text style={styles.descricao}><MaterialCommunityIcons name="clock-time-eight-outline" size={20} color="#EDCAFF" />  {dados.descanco}s </Text>
                 </View>
                 <View>
+                  <TouchableOpacity disabled={ dados.seriesFeitas === 1 } onPress={() => soma(dados.id, dados.seriesFeitas)}>
+                    <Text>
+                      skahjdjkha
+                    </Text>
+                  </TouchableOpacity>
 
-                  <Pressable onPress={soma}>
-                    <Text>teste {numeroSerieConcluida}</Text>
-                  </Pressable>
+                <Checkbox
+                  status={checked ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    soma(dados.id, dados.seriesFeitas)
+                    setChecked(!checked);
+                    
+
+                    if (dados.seriesFeitas == 4){
+                      setChecked(!checked);
+                    }
+
+                    
+
+                  }}
+                />
+
+                  
+                    <Text>teste {dados.seriesFeitas}</Text>
+                  
                   
                 </View>
               </Card.Content>
@@ -106,8 +134,8 @@ export function Superior() {
   
 });
 
-const dados = [{
-  id: 1,
+var dados = [{
+  id: 0,
   exercicio: 'biceps halter',
   serie: 4,
   repeticao: 10,
@@ -125,7 +153,7 @@ const dados = [{
   seriesFeitas : 0
 },
 {
-  id: 1,
+  id: 2,
   exercicio: 'biceps rosca',
   serie: 4,
   repeticao: 10,
@@ -135,14 +163,3 @@ const dados = [{
 },
 ];
 
-// const [numeroSerieConcluida ] = useState(0);
-
-var numeroSerieConcluida = 0.0
-function soma(){
- if (numeroSerieConcluida < 1){
-   numeroSerieConcluida += 0.25;
-
- }else numeroSerieConcluida = 0;
-
-  
-}
