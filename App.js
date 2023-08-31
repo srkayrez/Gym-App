@@ -4,6 +4,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Superior } from './Screens/superior';
+import { Inferior } from './Screens/inferiores';
 
 function HomeScreen({ navigation }) {
   return (
@@ -20,7 +21,7 @@ function HomeScreen({ navigation }) {
               <Text>Superiores </Text>
           </Pressable>
       
-          <Pressable style={styles.btnSelectTraining} onPress={() => navigation.navigate('Treino Superior')}>
+          <Pressable style={styles.btnSelectTraining} onPress={() => navigation.navigate('Treino Inferior')}>
                 <Image source={require('./assets/imagens/perna.png')} style={{width:100, height:100, marginBottom:10}} />
               <Text>Inferiores</Text>
           </Pressable>
@@ -55,6 +56,7 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Treino Fácil" component={HomeScreen} />
         <Stack.Screen name="Treino Superior" component={Superior} />
+        <Stack.Screen name="Treino Inferior" component={Inferior} />
       </Stack.Navigator>
     </NavigationContainer>
   );

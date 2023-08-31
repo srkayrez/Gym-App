@@ -57,3 +57,29 @@ function OpenSupTraining() {
 function OpenInfTraining() {
   Alert.alert('Funcionou!','Aqui vai abrir o treino inferrior')
 }
+
+
+<View style={styles.centeredView}>
+                    <Modal
+                      animationType="slide"
+                      transparent={true}
+                      visible={modalVisible}
+                      onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                      }}>
+                      <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                          <Text style={styles.modalText}>Hello World!</Text>
+                          <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => setModalVisible(!modalVisible)}>
+                            <Text style={styles.textStyle}>Hide Modal</Text>
+                          </Pressable>
+                        </View>
+                      </View>
+                    </Modal>
+                    <Pressable onPress={() => setModalVisible(true)}>
+                        <Text style={styles.descricao}><MaterialCommunityIcons name="weight-kilogram" size={20} color="#EDCAFF" />  {dados.peso} kg </Text>
+                    </Pressable>
+                  </View>

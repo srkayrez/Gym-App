@@ -8,7 +8,7 @@ import {
   Pressable,
   TouchableOpacity,
   Modal,
-  TextInput} from 'react-native';
+  TextInput,} from 'react-native';
 
 import * as React from 'react';
 import { Feather } from '@expo/vector-icons'; 
@@ -26,41 +26,20 @@ import {
 
 
 
-
-export function Superior() {
+export function Inferior() {
   
  
   const [valor, setValor] = React.useState(0)
   
-  
-  // function soma(id, series){
-    
-  //   if (series < 1){
-      
-  //     series += 0.25
-  //     setValor(prev => prev+1)
 
-  //     if( series === 1){
-  //       setChecked(false)
-  //     }
-      
-  //   }else {
-  //     series = 0;
-  //   }
-    
-  //   return dados[id].seriesFeitas = series
-    
-  // }
   
   return (
+    
     <ScrollView>
 
-    <View style={styles.container}>
-     
-
         <View style={styles.btnSelectTraining}>
-          <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginVertical:10,}} />
-          <Text> Superiores </Text>
+          <Image source={require('../assets/imagens/perna.png')} style={{width:100, height:100, marginVertical:10,}} />
+          <Text> Inferiores </Text>
         </View>
         
         
@@ -68,12 +47,12 @@ export function Superior() {
         {dados.map((dados) => {
           
           const [checked, setChecked] = React.useState(false);
-
+          
           const [modalVisible, setModalVisible] = React.useState(false);
 
           const [text, onChangeText] = React.useState('Useless Text');
           const [number, onChangeNumber] = React.useState('');
-
+          
           return (
             
             
@@ -98,10 +77,10 @@ export function Superior() {
                 />
                 
               </View>
-                <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
+                <Image source={require('../assets/imagens/perna.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
                 <View style={{flexDirection:'row', alignSelf:'center', gap:15, marginBottom:15}}>
                   <Text style={styles.descricao}><Feather name="repeat" size={15} color="#EDCAFF" />  {dados.serie} / {dados.repeticao} </Text>
-                  
+
                   <View style={styles.centeredView}>
                     <Modal
                       animationType="slide"
@@ -166,7 +145,6 @@ export function Superior() {
           </View>
           );
         })}
-      </View>
       </View>
         </ScrollView>
     );
@@ -237,7 +215,7 @@ export function Superior() {
 
 var dados = [{
   id: 0,
-  exercicio: 'biceps halter',
+  exercicio: 'Leg press',
   serie: 4,
   repeticao: 10,
   peso: 25,
@@ -246,7 +224,7 @@ var dados = [{
 },
 {
   id: 1,
-  exercicio: 'biceps barra',
+  exercicio: 'Agachamento (HACK)',
   serie: 4,
   repeticao: 10,
   peso: 30,                                      
@@ -255,7 +233,7 @@ var dados = [{
 },
 {
   id: 2,
-  exercicio: 'biceps rosca',
+  exercicio: 'Abdutora',
   serie: 4,
   repeticao: 10,
   peso: 30,
