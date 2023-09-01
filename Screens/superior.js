@@ -23,7 +23,8 @@ import {
   Card,
   Checkbox } from 'react-native-paper';
 
-
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import { useCountdown } from 'react-native-countdown-circle-timer'
 
 
 
@@ -32,25 +33,6 @@ export function Superior() {
  
   const [valor, setValor] = React.useState(0)
   
-  
-  // function soma(id, series){
-    
-  //   if (series < 1){
-      
-  //     series += 0.25
-  //     setValor(prev => prev+1)
-
-  //     if( series === 1){
-  //       setChecked(false)
-  //     }
-      
-  //   }else {
-  //     series = 0;
-  //   }
-    
-  //   return dados[id].seriesFeitas = series
-    
-  // }
   
   return (
     <ScrollView>
@@ -70,14 +52,26 @@ export function Superior() {
           const [checked, setChecked] = React.useState(false);
 
           const [modalVisible, setModalVisible] = React.useState(false);
+          const [modalTimerVisible, setModalTimerVisible] = React.useState(false);
 
           const [text, onChangeText] = React.useState('Useless Text');
           const [number, onChangeNumber] = React.useState('');
 
+          const {
+            path,
+            pathLength,
+            stroke,
+            strokeDashoffset,
+            remainingTime,
+            elapsedTime,
+            size,
+            strokeWidth,
+          } = useCountdown({ isPlaying: true, duration: 7, colors: '#abc' })
+
           return (
             
             
-            <View style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
+            <View key={dados.id} style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
             <Card style={{alignContent:'center', width:'90%', borderRadius:10,}}>
               <Card.Content style={{}}>
               <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
@@ -149,25 +143,71 @@ export function Superior() {
                 </View>
                 <View>
 
-                  <TouchableOpacity style={styles.descricao} disabled={ dados.seriesFeitas === 1 } onPress={() => {
-                  if (dados.seriesFeitas < 1){
-      
-                    dados.seriesFeitas += 0.25;
-                    setValor(prev => prev+1);
-                    if(dados.seriesFeitas >= 1 ){
-                      setChecked(!checked)
-                    }
-                    
-                    
-                  }else {
-                    dados.seriesFeitas = 0;
+                  <View style={styles.centeredView}>
+                    <Modal
+                      animationType="slide"
+                      transparent={true}
+                      visible={modalTimerVisible}
+                      onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        
+                      }}>
+                      <View style={{flex:1 ,justifyContent: 'center', alignItems: 'center',}}>
+                        <View style={styles.modalView}>
+                       
+                       <Text style={{fontSize:20, marginBottom:15}}>Descanço</Text>
+
+                        <CountdownCircleTimer
+                          isPlaying
+                          duration={60}
+                          colors={['#693E7F', '#693E7F', '#693E7F', '#693E7F']}
+                          colorsTime={[50, 40, 30, 10]}>
+
+                          {({ remainingTime }) => <Text style={{fontSize:50}}>{remainingTime}</Text>}
+
+                        </CountdownCircleTimer>
+
+
+                          <View style={{flexDirection:'row', marginTop:15}}>
+                            <Pressable style={{marginHorizontal:10,}}
+                              onPress={() => {
+                                setModalTimerVisible(!modalTimerVisible)
+                              }}>
+                              <Text style={styles.descricao}>Pular</Text>
+                            </Pressable>
+
+                             
+
+                          </View>
+                        </View>
+                      </View>
+                    </Modal>
+                    <TouchableOpacity style={styles.descricao} disabled={ dados.seriesFeitas === 1 } onPress={() => {
+
+                      setModalTimerVisible(!modalTimerVisible)
+                      
+                      if (dados.seriesFeitas < 1){
+                        
+                        dados.seriesFeitas += 0.25;
+                        
+                        setValor(prev => prev+1);
+                        
+                        if(dados.seriesFeitas >= 1 ){
+                          
+                          setChecked(!checked)
+                          
+                        }
+                      }
+                      else {
+                        // dados.seriesFeitas = 0;
                   }
-                  
+
                   }}>
                     <Text style={{color:'#EDCAFF', textAlign:'center'}}>
                       Contar serie
                     </Text>
                   </TouchableOpacity>
+                  </View>
                 
                 </View>
               </Card.Content>
