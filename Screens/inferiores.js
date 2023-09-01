@@ -23,8 +23,8 @@ import {
   Card,
   Checkbox } from 'react-native-paper';
   
-import CountDown from 'react-native-countdown-component';
-
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import { useCountdown } from 'react-native-countdown-circle-timer'
 
 
 
@@ -56,12 +56,23 @@ export function Inferior() {
           const [text, onChangeText] = React.useState('Useless Text');
           const [number, onChangeNumber] = React.useState('');
 
+          const {
+            path,
+            pathLength,
+            stroke,
+            strokeDashoffset,
+            remainingTime,
+            elapsedTime,
+            size,
+            strokeWidth,
+          } = useCountdown({ isPlaying: true, duration: 7, colors: '#abc' })
+
 
           
           return (
             
             
-            <View style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
+            <View key={dados.id} style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
             <Card style={{alignContent:'center', width:'90%', borderRadius:10,}}>
               <Card.Content style={{}}>
               <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
@@ -131,41 +142,11 @@ export function Inferior() {
                   </View>
 
                   <Text style={styles.descricao}><MaterialCommunityIcons name="clock-time-eight-outline" size={20} color="#EDCAFF" />  
-                  
+                  {dados.descanco}
                   s 
                   </Text>
                 </View>
                 <View>
-
-
-
-
-
-
-
-                  <TouchableOpacity style={styles.descricao} disabled={ dados.seriesFeitas === 1 } onPress={() => {
-                  if (dados.seriesFeitas < 1){
-      
-                    dados.seriesFeitas += 0.25;
-                    setValor(prev => prev+1);
-                    if(dados.seriesFeitas >= 1 ){
-                      setChecked(!checked)
-                    }
-
-                    
-                    
-                  }else {
-                    dados.seriesFeitas = 0;
-                  }
-
-
-                  
-                  }}>
-                    <Text style={{color:'#EDCAFF', textAlign:'center'}}>
-                      Contar serie
-                    </Text>
-                  </TouchableOpacity>
-                
 
                   <View style={styles.centeredView}>
                     <Modal
@@ -179,47 +160,53 @@ export function Inferior() {
                       <View style={{flex:1 ,justifyContent: 'center', alignItems: 'center',}}>
                         <View style={styles.modalView}>
                        
-                       
+                       <Text style={{fontSize:20, marginBottom:15}}>Descanço</Text>
 
-                          <View style={{flexDirection:'row'}}>
+                        <CountdownCircleTimer
+                          isPlaying
+                          duration={60}
+                          colors={['#693E7F', '#693E7F', '#693E7F', '#693E7F']}
+                          colorsTime={[50, 40, 30, 10]}>
+
+                          {({ remainingTime }) => <Text style={{fontSize:50}}>{remainingTime}</Text>}
+
+                        </CountdownCircleTimer>
+
+
+                          <View style={{flexDirection:'row', marginTop:15}}>
                             <Pressable style={{marginHorizontal:10,}}
                               onPress={() => {
                                 setModalTimerVisible(!modalTimerVisible)
                               }}>
-                              <Text style={styles.descricaoFechar}>Pular</Text>
+                              <Text style={styles.descricao}>Pular</Text>
                             </Pressable>
 
-                            <Pressable style={{marginHorizontal:10}}
-                              onPress={() => {
-                              dados.peso = number
-                              setModalVisible(!modalTimerVisible)
-                            }}>
-                              <Text style={styles.descricaoSalvar}>Salvar</Text>
-                            </Pressable>
+                             
+
                           </View>
                         </View>
                       </View>
                     </Modal>
                     <TouchableOpacity style={styles.descricao} disabled={ dados.seriesFeitas === 1 } onPress={() => {
-                  if (dados.seriesFeitas < 1){
-      
-                    dados.seriesFeitas += 0.25;
-                    setValor(prev => prev+1);
-                    if(dados.seriesFeitas >= 1 ){
-                      setChecked(!checked)
 
-                      setModalTimerVisible(true)
-
-                     
-                    }
-                  }else {
-                    dados.seriesFeitas = 0;
+                      setModalTimerVisible(!modalTimerVisible)
+                      
+                      if (dados.seriesFeitas < 1){
+                        
+                        dados.seriesFeitas += 0.25;
+                        
+                        setValor(prev => prev+1);
+                        
+                        if(dados.seriesFeitas >= 1 ){
+                          
+                          setChecked(!checked)
+                          
+                        }
+                      }
+                      else {
+                        // dados.seriesFeitas = 0;
                   }
 
-                  setModalTimerVisible(true)
-
-                  
-                  
                   }}>
                     <Text style={{color:'#EDCAFF', textAlign:'center'}}>
                       Contar serie
