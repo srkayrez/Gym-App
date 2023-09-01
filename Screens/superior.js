@@ -121,13 +121,22 @@ export function Superior() {
                               placeholder="Novo peso"
                               keyboardType="numeric"
                             />
-                          <Pressable
-                            onPress={() => {
-                              dados.peso = number
-                              setModalVisible(!modalVisible)
+                          <View style={{flexDirection:'row'}}>
+                            <Pressable style={{marginHorizontal:10,}}
+                              onPress={() => {
+                                setModalVisible(!modalVisible)
                               }}>
-                            <Text style={styles.descricao}>Salvar</Text>
-                          </Pressable>
+                              <Text style={styles.descricaoFechar}>Cancelar</Text>
+                            </Pressable>
+
+                            <Pressable style={{marginHorizontal:10}}
+                              onPress={() => {
+                                dados.peso = number
+                                setModalVisible(!modalVisible)
+                              }}>
+                              <Text style={styles.descricaoSalvar}>Salvar</Text>
+                            </Pressable>
+                          </View>
                         </View>
                       </View>
                     </Modal>
@@ -196,6 +205,22 @@ export function Superior() {
     paddingVertical:5,
     textAlign:'center',
   },
+  descricaoFechar: {
+    backgroundColor:'#D44A4D',
+    color: 'white',
+    borderRadius: 10,
+    paddingHorizontal:10,
+    paddingVertical:5,
+    textAlign:'center',
+  },
+  descricaoSalvar: {
+    backgroundColor:'#0CAFAA',
+    color: 'white',
+    borderRadius: 10,
+    paddingHorizontal:10,
+    paddingVertical:5,
+    textAlign:'center',
+  },
   modalView: {
     verticalAlign: 'center',
     justifyContent: 'center',
@@ -231,6 +256,7 @@ export function Superior() {
     borderWidth: 1,
     padding: 10,
     borderRadius:15,
+    textAlign:'center'
   },
   
 });

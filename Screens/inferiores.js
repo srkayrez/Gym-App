@@ -22,6 +22,8 @@ import {
   ProgressBar,
   Card,
   Checkbox } from 'react-native-paper';
+  
+import CountDown from 'react-native-countdown-component';
 
 
 
@@ -49,9 +51,12 @@ export function Inferior() {
           const [checked, setChecked] = React.useState(false);
           
           const [modalVisible, setModalVisible] = React.useState(false);
+          const [modalTimerVisible, setModalTimerVisible] = React.useState(false);
 
           const [text, onChangeText] = React.useState('Useless Text');
           const [number, onChangeNumber] = React.useState('');
+
+
           
           return (
             
@@ -100,13 +105,23 @@ export function Inferior() {
                               placeholder="Novo peso"
                               keyboardType="numeric"
                             />
-                          <Pressable
-                            onPress={() => {
-                              dados.peso = number
-                              setModalVisible(!modalVisible)
+
+                          <View style={{flexDirection:'row'}}>
+                            <Pressable style={{marginHorizontal:10,}}
+                              onPress={() => {
+                                setModalVisible(!modalVisible)
                               }}>
-                            <Text style={styles.descricao}>Salvar</Text>
-                          </Pressable>
+                              <Text style={styles.descricaoFechar}>Cancelar</Text>
+                            </Pressable>
+
+                            <Pressable style={{marginHorizontal:10}}
+                              onPress={() => {
+                                dados.peso = number
+                                setModalVisible(!modalVisible)
+                              }}>
+                              <Text style={styles.descricaoSalvar}>Salvar</Text>
+                            </Pressable>
+                          </View>
                         </View>
                       </View>
                     </Modal>
@@ -115,9 +130,18 @@ export function Inferior() {
                     </Pressable>
                   </View>
 
-                  <Text style={styles.descricao}><MaterialCommunityIcons name="clock-time-eight-outline" size={20} color="#EDCAFF" />  {dados.descanco}s </Text>
+                  <Text style={styles.descricao}><MaterialCommunityIcons name="clock-time-eight-outline" size={20} color="#EDCAFF" />  
+                  
+                  s 
+                  </Text>
                 </View>
                 <View>
+
+
+
+
+
+
 
                   <TouchableOpacity style={styles.descricao} disabled={ dados.seriesFeitas === 1 } onPress={() => {
                   if (dados.seriesFeitas < 1){
@@ -127,11 +151,14 @@ export function Inferior() {
                     if(dados.seriesFeitas >= 1 ){
                       setChecked(!checked)
                     }
+
                     
                     
                   }else {
                     dados.seriesFeitas = 0;
                   }
+
+
                   
                   }}>
                     <Text style={{color:'#EDCAFF', textAlign:'center'}}>
@@ -139,6 +166,70 @@ export function Inferior() {
                     </Text>
                   </TouchableOpacity>
                 
+
+                  <View style={styles.centeredView}>
+                    <Modal
+                      animationType="slide"
+                      transparent={true}
+                      visible={modalTimerVisible}
+                      onRequestClose={() => {
+                        Alert.alert('Modal has been closed.');
+                        
+                      }}>
+                      <View style={{flex:1 ,justifyContent: 'center', alignItems: 'center',}}>
+                        <View style={styles.modalView}>
+                       
+                       
+
+                          <View style={{flexDirection:'row'}}>
+                            <Pressable style={{marginHorizontal:10,}}
+                              onPress={() => {
+                                setModalTimerVisible(!modalTimerVisible)
+                              }}>
+                              <Text style={styles.descricaoFechar}>Pular</Text>
+                            </Pressable>
+
+                            <Pressable style={{marginHorizontal:10}}
+                              onPress={() => {
+                              dados.peso = number
+                              setModalVisible(!modalTimerVisible)
+                            }}>
+                              <Text style={styles.descricaoSalvar}>Salvar</Text>
+                            </Pressable>
+                          </View>
+                        </View>
+                      </View>
+                    </Modal>
+                    <TouchableOpacity style={styles.descricao} disabled={ dados.seriesFeitas === 1 } onPress={() => {
+                  if (dados.seriesFeitas < 1){
+      
+                    dados.seriesFeitas += 0.25;
+                    setValor(prev => prev+1);
+                    if(dados.seriesFeitas >= 1 ){
+                      setChecked(!checked)
+
+                      setModalTimerVisible(true)
+
+                     
+                    }
+                  }else {
+                    dados.seriesFeitas = 0;
+                  }
+
+                  setModalTimerVisible(true)
+
+                  
+                  
+                  }}>
+                    <Text style={{color:'#EDCAFF', textAlign:'center'}}>
+                      Contar serie
+                    </Text>
+                  </TouchableOpacity>
+                  </View>
+
+
+
+
                 </View>
               </Card.Content>
             </Card>
@@ -169,6 +260,22 @@ export function Inferior() {
   descricao: {
     backgroundColor:'#693E7F',
     color: '#EDCAFF',
+    borderRadius: 10,
+    paddingHorizontal:10,
+    paddingVertical:5,
+    textAlign:'center',
+  },
+  descricaoFechar: {
+    backgroundColor:'#D44A4D',
+    color: 'white',
+    borderRadius: 10,
+    paddingHorizontal:10,
+    paddingVertical:5,
+    textAlign:'center',
+  },
+  descricaoSalvar: {
+    backgroundColor:'#0CAFAA',
+    color: 'white',
     borderRadius: 10,
     paddingHorizontal:10,
     paddingVertical:5,
@@ -209,6 +316,7 @@ export function Inferior() {
     borderWidth: 1,
     padding: 10,
     borderRadius:15,
+    textAlign:'center'
   },
   
 });
