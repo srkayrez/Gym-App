@@ -38,15 +38,13 @@ export function Superior() {
     <ScrollView>
 
     <View style={styles.container}>
-     
 
         <View style={styles.btnSelectTraining}>
           <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginVertical:10,}} />
           <Text> Superiores </Text>
         </View>
         
-        
-        <View style={{ alignItems:'center'}}>
+        <View style={{ alignItems:'center', width:'100%'}}>
         {dados.map((dados) => {
           
           const [checked, setChecked] = React.useState(false);
@@ -71,11 +69,9 @@ export function Superior() {
           return (
             
             
-            <View key={dados.id} style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
-            <Card style={{alignContent:'center', width:'90%', borderRadius:10,}}>
+            <View key={dados.id} style={{alignContent:'center', alignItems:'baseline', marginBottom:15, width:'100%', opacity: dados.seriesFeitas === 1 ? 0.7 : 1, }}>
+            <Card style={{alignContent:'center', width:'90%', borderRadius:10, alignSelf:'center'}}>
               <Card.Content style={{}}>
-              <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
-              <Text style={{textAlign:'center'}}>{dados.seriesFeitas*4}/{dados.serie}</Text>
               <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text style={{textAlign:'center', fontSize:20, marginBottom:10}}> {dados.exercicio} </Text>
                     
@@ -92,6 +88,8 @@ export function Superior() {
                 />
                 
               </View>
+              <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
+              <Text style={{textAlign:'center'}}>{dados.seriesFeitas*4}/{dados.serie}</Text>
                 <Image source={require('../assets/imagens/braco.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
                 <View style={{flexDirection:'row', alignSelf:'center', gap:15, marginBottom:15}}>
                   <Text style={styles.descricao}><Feather name="repeat" size={15} color="#EDCAFF" />  {dados.serie} / {dados.repeticao} </Text>
@@ -115,7 +113,7 @@ export function Superior() {
                               placeholder="Novo peso"
                               keyboardType="numeric"
                             />
-                          <View style={{flexDirection:'row'}}>
+                          <View style={{flexDirection:'row',width: '100%' , justifyContent:'space-between'}}>
                             <Pressable style={{marginHorizontal:10,}}
                               onPress={() => {
                                 setModalVisible(!modalVisible)
@@ -175,8 +173,6 @@ export function Superior() {
                               }}>
                               <Text style={styles.descricao}>Pular</Text>
                             </Pressable>
-
-                             
 
                           </View>
                         </View>
@@ -246,19 +242,17 @@ export function Superior() {
     textAlign:'center',
   },
   descricaoFechar: {
-    backgroundColor:'#D44A4D',
-    color: 'white',
+    backgroundColor:'#EDCAFF',
+    color: '#693E7F',
     borderRadius: 10,
-    paddingHorizontal:10,
-    paddingVertical:5,
+    padding:10,
     textAlign:'center',
   },
   descricaoSalvar: {
-    backgroundColor:'#0CAFAA',
-    color: 'white',
+    backgroundColor:'#693E7F',
+    color: '#EDCAFF',
     borderRadius: 10,
-    paddingHorizontal:10,
-    paddingVertical:5,
+    padding: 10,
     textAlign:'center',
   },
   modalView: {
@@ -272,6 +266,7 @@ export function Superior() {
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: '90%'
     
   },
 
@@ -296,10 +291,12 @@ export function Superior() {
     borderWidth: 1,
     padding: 10,
     borderRadius:15,
-    textAlign:'center'
-  },
+    textAlign:'center',
+    width:'90%',
+    
   
-});
+}}
+);
 
 var dados = [{
   id: 0,

@@ -43,8 +43,7 @@ export function Inferior() {
           <Image source={require('../assets/imagens/perna.png')} style={{width:100, height:100, marginVertical:10,}} />
           <Text> Inferiores </Text>
         </View>
-        
-        
+               
         <View style={{ alignItems:'center'}}>
         {dados.map((dados) => {
           
@@ -67,16 +66,17 @@ export function Inferior() {
             strokeWidth,
           } = useCountdown({ isPlaying: true, duration: 7, colors: '#abc' })
 
+          
+          
 
           
           return (
+
             
             
-            <View key={dados.id} style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1}}>
-            <Card style={{alignContent:'center', width:'90%', borderRadius:10,}}>
+            <View key={dados.id} style={{alignContent:'center', alignItems:'baseline', marginBottom:15, opacity: dados.seriesFeitas === 1 ? 0.7 : 1, width:'100%'}}>
+            <Card style={{alignContent:'center', width:'90%', borderRadius:10, alignSelf:'center'}}>
               <Card.Content style={{}}>
-              <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
-              <Text style={{textAlign:'center'}}>{dados.seriesFeitas*4}/{dados.serie}</Text>
               <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                 <Text style={{textAlign:'center', fontSize:20, marginBottom:10}}> {dados.exercicio} </Text>
                     
@@ -93,6 +93,8 @@ export function Inferior() {
                 />
                 
               </View>
+                  <ProgressBar progress={dados.seriesFeitas} style={{backgroundColor:'#EDCAFF', color:'#693E7F'}} />
+                    <Text style={{textAlign:'center'}}>{dados.seriesFeitas*4}/{dados.serie}</Text>
                 <Image source={require('../assets/imagens/perna.png')} style={{width:100, height:100, marginBottom:10, alignSelf:'center'}}></Image>
                 <View style={{flexDirection:'row', alignSelf:'center', gap:15, marginBottom:15}}>
                   <Text style={styles.descricao}><Feather name="repeat" size={15} color="#EDCAFF" />  {dados.serie} / {dados.repeticao} </Text>
@@ -117,7 +119,7 @@ export function Inferior() {
                               keyboardType="numeric"
                             />
 
-                          <View style={{flexDirection:'row'}}>
+                          <View style={{flexDirection:'row',width: '100%' , justifyContent:'space-between'}}>
                             <Pressable style={{marginHorizontal:10,}}
                               onPress={() => {
                                 setModalVisible(!modalVisible)
@@ -253,19 +255,17 @@ export function Inferior() {
     textAlign:'center',
   },
   descricaoFechar: {
-    backgroundColor:'#D44A4D',
-    color: 'white',
+    backgroundColor:'#EDCAFF',
+    color: '#693E7F',
     borderRadius: 10,
-    paddingHorizontal:10,
-    paddingVertical:5,
+    padding:10,
     textAlign:'center',
   },
   descricaoSalvar: {
-    backgroundColor:'#0CAFAA',
-    color: 'white',
+    backgroundColor:'#693E7F',
+    color: '#EDCAFF',
     borderRadius: 10,
-    paddingHorizontal:10,
-    paddingVertical:5,
+    padding: 10,
     textAlign:'center',
   },
   modalView: {
@@ -279,6 +279,7 @@ export function Inferior() {
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    width: '90%'
     
   },
 
@@ -303,10 +304,11 @@ export function Inferior() {
     borderWidth: 1,
     padding: 10,
     borderRadius:15,
-    textAlign:'center'
-  },
+    textAlign:'center',
+    width:'90%',
   
-});
+}}
+);
 
 var dados = [{
   id: 0,
